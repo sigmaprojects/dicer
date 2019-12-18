@@ -1,0 +1,39 @@
+{
+    "include": [
+      "./src/**/*",
+      "src/**/*.ts",
+      "src/**/*.vue",
+      "*.ts"
+    ],
+    "exclude": [
+        "node_modules", "dist", "public"
+    ],
+    "compilerOptions": {
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "es5",
+        "sourceMap": true,
+        "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "components/*": [
+                "src/components/*"
+            ],
+            "@/*": [
+                "src/*"
+            ],
+        },
+        "outDir": "dist",
+        
+        // from here 
+        "lib": [
+            "dom",
+            "es5",
+            "es2015",
+            "es2015.promise"
+        ],
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true
+    }
+  }
