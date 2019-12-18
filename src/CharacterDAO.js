@@ -8,11 +8,11 @@ export class CharacterDAO {
     
     list() {
         let arr = JSON.parse(localStorage.getItem(this.charactersKey))
-        for (let i = 0; i < arr.length; i++) {
-            arr[i] = Character.fromJSON(arr[i]);
-        }
         if( !Array.isArray(arr) ) {
             arr = []
+        }
+        for (let i = 0; i < arr.length; i++) {
+            arr[i] = Character.fromJSON(arr[i]);
         }
         return arr
     }
