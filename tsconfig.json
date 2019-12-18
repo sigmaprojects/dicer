@@ -6,7 +6,7 @@
       "*.ts"
     ],
     "exclude": [
-        "node_modules", "dist", "public"
+        "node_modules", "dist", "public", "docs"
     ],
     "compilerOptions": {
         "module": "es2015",
@@ -23,7 +23,7 @@
                 "src/*"
             ],
         },
-        "outDir": "dist",
+        "outDir": "docs",
         
         // from here 
         "lib": [
