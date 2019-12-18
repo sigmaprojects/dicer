@@ -1,4 +1,4 @@
-# dicer, a simple tool to help with speeding up d&d attack rolls
+# dicer, a simple tool to help with speeding up d&d attack rolls.
 
 ## Project setup
 ```
