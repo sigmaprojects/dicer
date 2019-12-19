@@ -15,6 +15,15 @@ export class Character {
 		}
 		return c;
 	}
+	getHumanReadableDiceForAttack(attackid) {
+		let diceString = '';
+		let diceCount = {};
+		this.attacks[attackid].dice.forEach(function(i) { diceCount[i] = (diceCount[i]||0) + 1;});
+		Object.entries(diceCount).forEach(([key,value])=>{
+			diceString = diceString +  value + 'd' + key + ' ';
+		});
+		return diceString;
+	}
     static fromJSON(serializedJson) {
         return Object.assign(new Character(), serializedJson)
     }
