@@ -1,4 +1,6 @@
 # dicer, a simple tool to help with speeding up d&d attack rolls.
+# This is a hobby project that gave me a chance to work with Vue for the first time.
+# Release on https://sigmaprojects.github.io/dicer/
 
 ## Project setup
 ```
