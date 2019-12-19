@@ -41,8 +41,9 @@ export default {
   },
   methods: {
     resetall() {
-      if(confirm('This will delete all saved characters and attacks, are you sure you want to continue?')){
+      if(confirm( 'This will delete all saved characters and attacks, are you sure you want to continue? ')){
         this.$CharacterDAO.saveAll([]);
+        // c
         this.$router.push('/');
       }
     }
