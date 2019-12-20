@@ -1,6 +1,23 @@
 <template>
   <div>
-    <h3>Play</h3>
+
+    <!--
+    <div class="float-left">
+      <v-btn small :to="{ name: 'playcharacter', params: { characterid: character.id }}">Reset</v-btn>
+    </div>
+    <div class="float-right">
+      <v-btn small :to="{ name: 'playcharacter', params: { characterid: character.id }}">Reset</v-btn>
+    </div>
+    -->
+
+    <v-container fluid class="pt-0 pb-0">
+      <v-row no-gutters>
+        <v-col cols="6">
+          <v-btn small v-on:click="refreshsheet">Refresh Sheet</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+    
 
     <v-text-field
       v-model="rolleddice"
@@ -68,8 +85,8 @@
          </v-col>
       </v-row>
       <div class="text-center mt-1">
-        <v-sheet color="primary lighten-2" v-if="hitdice.length > 0 || totalDmg.length > 0">
-          {{hitdice}} &nbsp; {{totalDmg}}
+        <v-sheet v-if="hitdice.length > 0 || totalDmg.length > 0">
+          <span class="mr-2 text--red" style="word-spacing: 20px;">{{hitdice}}</span> <span class="ml-2">{{totalDmg}}</span>
         </v-sheet>
       </div>
       <!--
@@ -110,7 +127,29 @@ export default {
     //console.log( this.$refs.tohit[0] );
   },
   methods: {
-    foo() {},
+    refreshsheet() {
+      this.character = this.$CharacterDAO.get(this.characterid);
+      this.rolleddice = '';
+      this.hitdice = '';
+      this.totalDmg = '';
+      this.diceTypes = [
+        {name: 'd4', value: 4, icon: 'mdi-dice-d4-outline'},
+        {name: 'd6', value: 6, icon: 'mdi-dice-d6-outline'},
+        {name: 'd8', value: 8, icon: 'mdi-dice-d8-outline'},
+        {name: 'd10', value: 10, icon: 'mdi-dice-d10-outline'},
+        {name: 'd12', value: 12, icon: 'mdi-dice-d12-outline'},
+        {name: 'd20', value: 20, icon: 'mdi-dice-d20-outline'},
+      ];
+      this.hits = getBlankHits()
+      for(let i = 0; i < this.character.attacks.length; i++) {
+        this.$refs.tohit[i].textContent = '';
+      }
+      let elms = this.$el.querySelectorAll("input[id^='checkbox'][checked=true], input[id^='checkbox']:checked");
+      for(let i = 0; i < elms.length; i++) {
+        elms[i].checked = false;
+        elms[i].dispatchEvent( new Event('change') );
+      }
+    },
 
     isDiceRoll(evt) {
       // only allow specific characters into this field, namely numbers and seperators
