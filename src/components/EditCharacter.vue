@@ -81,6 +81,7 @@
 </template>
 
 <script>
+var to;
 // eslint-disable-next-line no-unused-vars
 import { Character, Attack } from "../classes";
 let isNumber = function(n) {
@@ -156,6 +157,7 @@ export default {
     parseDice(v) {
       let diceString = '';
       let diceCount = {};
+      
       v.forEach(function(i) { diceCount[i] = (diceCount[i]||0) + 1;});
       Object.entries(diceCount).forEach(([key,value])=>{
         diceString = diceString +  value + 'd' + key + ' ';
@@ -167,7 +169,9 @@ export default {
       if( !diceArray == false ) {
         // eslint-disable-next-line no-console
         //console.log('success');
-        this.character.attacks[id].dice = diceArray;
+        //this.character.attacks[id].dice = diceArray;
+        if (to) clearTimeout(to);
+        to = setTimeout(() => this.character.attacks[id].dice = diceArray, 1000);
       }
     },
     array_move(arr, old_index, new_index) {
