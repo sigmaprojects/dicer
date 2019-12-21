@@ -1,5 +1,5 @@
 <template>
-  
+  <div>
       <v-list two-line>
 
         <v-subheader>My Characters</v-subheader>
@@ -33,7 +33,23 @@
           <v-btn small color="warning" class="float-right" to="/editcharacter/-1">Create</v-btn>
         </v-list-item>
       </v-list>
-  
+
+      <v-expansion-panels accordion class="mt-4">
+        <v-expansion-panel>
+          <v-expansion-panel-header>About</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <div class="body-2">
+            This D&amp;D tool: <br />
+            1) Adds up all your attack To Hits. <br />
+            2) Lets you check-off which attacks hit. <br />
+            3) Counts which Damage Dice need to be rolled. <br />
+            4) Sums up all the base damage. <br />
+            Create a character, then when you're playing simply copy all your rolled d20 results here, the tool will do the rest. <br />
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+  </div>
 </template>
 
 <script>
