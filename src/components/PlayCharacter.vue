@@ -26,7 +26,7 @@
             placeholder="0"
             v-model="toDmgMod"
             label="+To All Dmg Mod"
-            v-on:input="updateToDmgMod($event)"
+            v-on:input="updateToDmgMod()"
           />
 
         </v-col>
