@@ -5,6 +5,31 @@
         <v-col cols="6">
           <v-btn small v-on:click="refreshsheet">Refresh Sheet</v-btn>
         </v-col>
+        <v-col cols="2">
+
+          <v-text-field dense
+            type="number"
+            placeholder="0"
+            v-model="toHitMod"
+            label="+To Hit All Mod"
+            v-on:input="updateToHitMod()"
+          />
+
+        </v-col>
+
+        <v-col cols="1"></v-col>
+
+        <v-col cols="2">
+
+          <v-text-field dense
+            type="number"
+            placeholder="0"
+            v-model="toDmgMod"
+            label="+To All Dmg Mod"
+            v-on:input="updateToDmgMod($event)"
+          />
+
+        </v-col>
       </v-row>
     </v-container>
 
@@ -89,6 +114,8 @@ export default {
   props: ["characterid"],
   data: () => ({
     character: new Character(),
+    toHitMod: "",
+    toDmgMod: "",
     rolleddice: "",
     hitdice: "",
     totalDmg: "",
@@ -104,13 +131,15 @@ export default {
   }),
   mounted() {
     this.character = this.$CharacterDAO.get(this.characterid);
-
+    this._character = this.$CharacterDAO.get(this.characterid);
     // eslint-disable-next-line no-console
     //console.log( this.$refs.tohit[0] );
   },
   methods: {
     refreshsheet() {
       this.character = this.$CharacterDAO.get(this.characterid);
+      this.toHitMod = "";
+      this.toDmgMod = "";
       this.rolleddice = "";
       this.hitdice = "";
       this.totalDmg = "";
@@ -135,8 +164,30 @@ export default {
       }
     },
 
+    updateToHitMod() {
+      //if( v.length == 0) { this.toHitMod = 0; v = 0; }
+      let value = this.toHitMod;
+      // eslint-disable-next-line no-console
+      //console.log( value );
+      if( value.length == 0 ) { value = 0; }
+      for (let i = 0; i < this.character.attacks.length; i++) {
+        this.character.attacks[i].hit = parseInt(this._character.attacks[i].hit) + parseInt(value);
+      }
+    },
+    updateToDmgMod() {
+      //if( v.length == 0) { this.toDmgMod = 0; v = 0; }
+      let value = this.toDmgMod;
+      // eslint-disable-next-line no-console
+      //console.log( value );
+      if( value.length == 0 ) { value = 0; }
+      for (let i = 0; i < this.character.attacks.length; i++) {
+        this.character.attacks[i].dmg = parseInt(this._character.attacks[i].dmg) + parseInt(value);
+      }
+    },
+
     isDiceRoll(evt) {
-      // only allow specific characters into this field, namely numbers and seperators
+      // only allow specific characters into this field, namely numbers and seperators like
+      // space, comma, dash, pipe
       // eslint-disable-next-line no-console
       //console.log(evt.keyCode)
       evt = evt ? evt : window.event;
